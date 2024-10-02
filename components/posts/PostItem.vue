@@ -1,7 +1,7 @@
 <template>
-    <div class="post">
-      <div class="post-image">
-        <div class="post-image__inner">
+    <div class="post-item">
+      <div class="post-item-image">
+        <div class="post-item-image__inner">
           <img
             :src="post.image"
             @error="onImageError"
@@ -9,10 +9,10 @@
           />
         </div>
       </div>
-      <div class="post-description">
+      <div class="post-item-description">
         <p>{{ post.preview }}</p>
       </div>
-      <a :href="post.id">Read more</a>
+      <a :href="'posts/' + post.id">Read more</a>
     </div>
   </template>
   
@@ -34,7 +34,7 @@
   </script>
   
   <style scoped lang="scss">
-  .post {
+  .post-item {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -73,6 +73,7 @@
   
     a {
       display: none;
+      align-items: center;
       opacity: 0;
       transition: opacity 0.3s ease;
       color: $purple-light;
@@ -82,7 +83,7 @@
     }
   }
   
-  .post:hover {
+  .post-item:hover {
     padding-top: 0;
   
     a {
@@ -91,7 +92,7 @@
       pointer-events: auto;
     }
   
-    .post-image__inner {
+    .post-item-image__inner {
       transform: scale(1.1);
     }
   }

@@ -17,14 +17,14 @@
             Office in Russia
           </p>
           <p>139 Ruben Station Lake Drew, NM 52678</p>
-          <mailIcon></mailIcon>
+          <a href="#"><mailIcon></mailIcon></a>
         </div>
         <div class="footer-contacts__block-item">
           <p class="item-title">
             Office in Dubai
           </p>
           <p>139 Ruben Station Lake Drew, NM 52678</p>
-          <mailIcon></mailIcon>
+          <a href="#"><mailIcon></mailIcon></a>
         </div>
       </div>
     </div>
@@ -33,9 +33,9 @@
       <div class="footer-nav__left">
         <nav>
           <ul>
-            <li>Facebook</li>
-            <li>Instagram</li>
-            <li>Telegram</li>
+            <a href="#"><li>Facebook</li></a>
+            <a href="#"><li>Instagram</li></a>
+            <a href="#"><li>Telegram</li></a>
           </ul>
         </nav>
       </div>
@@ -43,9 +43,9 @@
       <div class="footer-nav__right">
         <nav>
           <ul>
-            <li>Behance</li>
-            <li>LinkedIn</li>
-            <li>Private Policy</li>
+            <a href="#"><li>Behance</li></a>
+            <a href="#"><li>LinkedIn</li></a>
+            <a href="#"><li>Private Policy</li></a>
           </ul>
         </nav>
       </div>
@@ -145,6 +145,52 @@ import mailIcon from '~/assets/img/icons/mail.vue'
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: transform 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+  }
+
+  li {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background-color: $black;
+      transition: width 0.4s ease;
+      bottom: -4px;
+    }
+
+    &::before {
+      left: 100%;
+      width: 0;
+      transform: translateX(-100%);
+    }
+
+    &::after {
+      right: 100%;
+      width: 0;
+      transform: translateX(100%);
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+      }
+
+      &::after {
+        width: 100%;
+      }
     }
   }
 }

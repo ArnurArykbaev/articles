@@ -1,8 +1,10 @@
 <template>
     <div class="pagination">
 
-        <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="{ active: currentPage === page }" class="page">
-            {{ page }}
+        <button v-for="page in visiblePages" :key="page" @click="goToPage(page)"
+            :class="{ active: currentPage === page, 'prev-page': page === '<' }" class="page">
+            <p v-if="page !== '<'">{{ page }}</p>
+            <nextIcon v-else class="prev-page__icon"></nextIcon>
         </button>
 
         <button @click="goToNextPage" :disabled="currentPage === totalPages" class="next-page page">
@@ -32,13 +34,15 @@ const visiblePages = computed(() => {
     for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
     }
-    if(+pages[0] >= 2) pages[0] = '<' 
+    if (+pages[0] >= 2) pages[0] = '<'
     return pages;
 });
 
-const goToPage = (page: number) => {
-    if (page >= 1 && page <= props.totalPages) {
-        currentPage.value = page;
+const goToPage = (page: number | string) => {
+    console.log('cure', page)
+    if (page === '<') goToPreviousPage()
+    if (+page >= 1 && +page <= props.totalPages) {
+        currentPage.value = +page;
     }
 };
 
@@ -65,34 +69,45 @@ watch(currentPage, (newPage) => {
     display: flex;
     gap: 10px;
     margin-top: 20px;
-}
 
-button {
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-}
+    button {
+        background-color: $gray-light;
+        border: none;
+        cursor: pointer;
 
-button.active {
-    background-color: $black;
-    color: white;
-}
+        &.active {
+            background-color: $black;
+            color: white;
+        }
 
-button:disabled {
-    cursor: not-allowed;
-    background-color: #e0e0e0;
-}
-button.page {
-    width: 40px;
-    aspect-ratio: 1;
-    border-radius: 12px;
-}
-button.next-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 1px solid $gray-light;
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $gray;
+        }
+
+        &.page {
+            width: 40px;
+            aspect-ratio: 1;
+            border-radius: 12px;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        &.prev-page,
+        &.next-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            border: 1px solid $gray-light;
+
+            .prev-page__icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
 }
 </style>
   

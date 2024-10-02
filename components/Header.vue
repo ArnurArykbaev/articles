@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header">
-            <img src="../assets/img/Qtim.svg" alt="">
+            <a href="/"><img src="../assets/img/Qtim.svg" alt=""></a>
             <div class="header-panel">
                 <nav>
                     <ul>
@@ -36,12 +36,50 @@
     &-panel {
         display: flex;
         flex-direction: row;
+        align-items: center;
         column-gap: 90px;
 
         ul {
             display: flex;
             flex-direction: row;
             column-gap: 60px;
+
+            li {
+                position: relative;
+                transition: transform 0.3s;
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    height: 1px;
+                    background-color: $black;
+                    transition: width 0.4s ease;
+                    bottom: 0px;
+                }
+
+                &::before {
+                    left: 100%;
+                    width: 0;
+                    transform: translateX(-100%);
+                }
+
+                &::after {
+                    right: 100%;
+                    width: 0;
+                    transform: translateX(100%);
+                }
+
+                &:hover {
+                    &::before {
+                        width: 100%;
+                    }
+
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
         }
 
         &__block {
@@ -57,6 +95,12 @@
                 border-radius: 50%;
                 border: 2px solid $gray-light;
                 background-color: $white;
+                transition: transform 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             button.btn-lets_work {
@@ -68,9 +112,14 @@
                 padding: 16px 32px;
                 background-color: $black;
                 color: $white;
+                transition: transform 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
     }
 }
 </style>
-  
