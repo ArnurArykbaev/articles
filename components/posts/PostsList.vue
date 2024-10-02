@@ -1,8 +1,6 @@
 <template>
     <div class="posts">
-        <div v-for="post in props.posts" :key="post.id" class="post-wrapper">
-            <Post :post="post" />
-        </div>
+        <Post v-for="post in props.posts" :key="post.id" class="post-wrapper" :post="post" />
     </div>
 </template>
 
@@ -18,6 +16,11 @@ interface Props {
 const props = defineProps<Props>();
 </script>
 
-<style scoped>
-/* Ваши стили для компонента PostsList */
+<style scoped lang="scss">
+.posts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 32px;
+    margin-top: 30px;
+}
 </style>
