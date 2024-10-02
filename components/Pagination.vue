@@ -1,18 +1,19 @@
 <template>
     <div class="pagination">
 
-        <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="{ active: currentPage === page }">
+        <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="{ active: currentPage === page }" class="page">
             {{ page }}
         </button>
 
-        <button @click="goToNextPage" :disabled="currentPage === totalPages">
-            >
+        <button @click="goToNextPage" :disabled="currentPage === totalPages" class="next-page page">
+            <nextIcon></nextIcon>
         </button>
     </div>
 </template>
   
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import nextIcon from '~/assets/img/icons/next.vue';
 
 interface Props {
     totalPages: number;
@@ -59,10 +60,9 @@ watch(currentPage, (newPage) => {
 });
 </script>
   
-<style scoped>
+<style scoped lang="scss">
 .pagination {
     display: flex;
-    justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
@@ -70,18 +70,29 @@ watch(currentPage, (newPage) => {
 button {
     background-color: #f0f0f0;
     border: none;
-    padding: 10px;
     cursor: pointer;
 }
 
 button.active {
-    background-color: #007bff;
+    background-color: $black;
     color: white;
 }
 
 button:disabled {
     cursor: not-allowed;
     background-color: #e0e0e0;
+}
+button.page {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 12px;
+}
+button.next-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid $gray-light;
 }
 </style>
   
