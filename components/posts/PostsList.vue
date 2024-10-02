@@ -1,12 +1,12 @@
 <template>
     <div class="posts">
-        <Post v-for="post in props.posts" :key="post.id" class="post-wrapper" :post="post" />
+        <PostItem v-for="post in props.posts" :key="post.id" class="post-wrapper" :post="post" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import Post from '~/components/posts/Post.vue';
+import PostItem from '~/components/posts/PostItem.vue';
 import { Article } from '~/models/Article';
 
 interface Props {
